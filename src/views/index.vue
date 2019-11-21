@@ -4,18 +4,18 @@
       <div class="handle-search">
         <span class="title">查&nbsp;&nbsp;询：</span>
         <el-select size="small" placeholder="年" v-model="obj.year">
-          <el-option v-for="y of yearMap"
+          <el-option v-for="y of yearMap" :key="y"
                      :label="y+'年'" :value="y"></el-option>
         </el-select>
         <el-select size="small" placeholder="月" v-model="obj.month">
-          <el-option v-for="m of monthMap"
+          <el-option v-for="m of monthMap" :key="m"
                      :label="m+'月'" :value="m"></el-option>
         </el-select>
         <el-select size="small" placeholder="日" v-model="obj.day">
-          <el-option v-for="d of dayMap"
+          <el-option v-for="d of dayMap" :key="d"
                      :label="d+'号'" :value="d"></el-option>
         </el-select>
-        <el-select size="small" placeholder="请选择" v-model="obj.type">
+        <el-select size="small" placeholder="请选择" style="width: 120px;" v-model="obj.type">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -33,32 +33,32 @@
         <el-input size="small" v-model="obj.equalSmall"
                   placeholder="<=">
         </el-input>
-        <el-button type="primary" size="small">查&nbsp;&nbsp;询</el-button>
+        <el-button type="primary" size="small">查&nbsp;&nbsp;&nbsp;询</el-button>
         <el-button type="primary" size="small">手工调整</el-button>
       </div>
       <div class="handle-input">
         <span class="title">按比例批量调整：</span>
         CPO:
-        <el-input size="small" v-model="CPO"
+        <el-input size="small" v-model="obj.CPO"
                   placeholder="CPO">
         </el-input>
 
         EMP:
-        <el-input size="small" v-model="EMP"
+        <el-input size="small" v-model="obj.EMP"
                   placeholder="EMP">
         </el-input>
         Hubject:
-        <el-input size="small" v-model="Hubject"
+        <el-input size="small" v-model="obj.Hubject"
                   placeholder="Hubject"
         >
         </el-input>
-        <el-button type="primary" size="small">提&nbsp;&nbsp;交</el-button>
+        <el-button type="primary" size="small">提&nbsp;&nbsp;&nbsp;交</el-button>
         <el-button type="primary" size="small">调整后平账</el-button>
         <el-button type="primary" size="small">回滚已调</el-button>
-        <el-button type="primary" size="small">结&nbsp;&nbsp;账</el-button>
+        <el-button type="primary" size="small">结&nbsp;&nbsp;&nbsp;账</el-button>
         <el-button type="primary" size="small">对账报表</el-button>
         <el-button type="primary" size="small">结账报表发送</el-button>
-        <el-select size="small" clearable placeholder="请选择">
+        <el-select size="small" clearable v-model="obj.type" placeholder="请选择">
           <el-option label="CPO" value="CPO"></el-option>
           <el-option label="EMP" value="EMP"></el-option>
         </el-select>
@@ -70,25 +70,26 @@
         <el-col :span="9">
           <div class="search-head">
             <p>CPO充电明细CDR</p>
-            <span class="label">选&nbsp;&nbsp;择：</span>
-            <el-select size="small" clearable placeholder="请选择">
-              <el-option label="EMP" value="CDR"></el-option>
-            </el-select>
-            <span class="label"> 充电站ID：</span>
-            <el-input size="small"
-                      placeholder="充电站ID"
-            >
-            </el-input>
-            <span class="label">充电桩ID：</span>
-            <el-input size="small"
-                      placeholder="充电桩ID"
-            >
-            </el-input>
-            <span class="label">订单ID：</span>
-            <el-input size="small"
-                      placeholder="订单ID"
-            >
-            </el-input>
+            <div class="head-item">
+              <span class="label">选&nbsp;&nbsp;择：</span>
+              <el-select size="small" v-model="obj.value1" clearable placeholder="请选择">
+                <el-option label="EMP" value="CDR"></el-option>
+              </el-select>
+              <span class="label"> 充电站ID：</span>
+              <el-input size="small" v-model="obj.value2"
+                        placeholder="充电站ID">
+              </el-input>
+            </div>
+            <div class="head-item">
+              <span class="label">充电桩ID：</span>
+              <el-input size="small" v-model="obj.value3"
+                        placeholder="充电桩ID">
+              </el-input>
+              <span class="label">订单ID：</span>
+              <el-input size="small" v-model="obj.value4"
+                        placeholder="订单ID">
+              </el-input>
+            </div>
           </div>
           <el-table
             :data="tableData"
@@ -126,20 +127,22 @@
         <el-col :span="9">
           <div class="search-head">
             <p>EMP用户账单</p>
-            <span class="label">选&nbsp;&nbsp;择：</span>
-            <el-select size="small" clearable placeholder="请选择">
-              <el-option label="EMP" value="EMP"></el-option>
-            </el-select>
-            <span class="label">用户ID：</span>
-            <el-input size="small"
-                      placeholder="用户ID"
-            >
-            </el-input>
-            <span class="label">账单ID：</span>
-            <el-input size="small"
-                      placeholder="账单ID"
-            >
-            </el-input>
+            <div class="head-item">
+              <span class="label">选&nbsp;&nbsp;择：</span>
+              <el-select size="small" v-model="obj.value7" clearable placeholder="请选择">
+                <el-option label="EMP" value="EMP"></el-option>
+              </el-select>
+              <span class="label">用户ID：</span>
+              <el-input size="small" v-model="obj.value5"
+                        placeholder="用户ID">
+              </el-input>
+            </div>
+            <div class="head-item">
+              <span class="label">账单ID：</span>
+              <el-input size="small" v-model="obj.value6"
+                        placeholder="账单ID">
+              </el-input>
+            </div>
           </div>
           <el-table
             :data="tableData"
@@ -167,7 +170,6 @@
           </el-table>
           <div class="pagination-div">
             <el-pagination
-
               layout="prev, pager, next"
               :total="1000">
             </el-pagination>
@@ -208,13 +210,13 @@
 
     <div class="bottom">
       <el-row :gutter="20">
-        <el-col :span="8">
+        <el-col :span="9">
           <p>问题订单总金额：<span>200</span></p>
         </el-col>
-        <el-col :span="8">
+        <el-col :span="9">
           <p>问题账单总金额：<span>0</span></p>
         </el-col>
-        <el-col :span="8">
+        <el-col :span="6">
           <p>总差异金额：<span>200</span></p>
         </el-col>
       </el-row>
@@ -243,6 +245,13 @@
           CPO: '',
           EMP: '',
           Hubject: '',
+          value1: '',
+          value2: '',
+          value3: '',
+          value4: '',
+          value5: '',
+          value6: '',
+          value7: ''
         },
 
         input1: '',
@@ -266,7 +275,7 @@
             date: '入账',
             name: '20000',
             address: '200'
-          }, 
+          },
           {
             date: '消费',
             name: '20000',
@@ -282,7 +291,7 @@
             name: '20000',
             address: '100'
           }
-          ]
+        ]
       }
     },
     created () {
@@ -333,7 +342,7 @@
 
   .title {
     display: inline-block;
-    width: 150px;
+    width: 130px;
     text-align: right;
     font-weight: 500;
   }
@@ -361,7 +370,6 @@
   .split-search {
     border-top: 1px solid #ddd;
     background-color: aliceblue;
-    padding-bottom: 20px;
   }
 
   .el-table th, .el-table tr,
