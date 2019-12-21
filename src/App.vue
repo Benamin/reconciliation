@@ -11,8 +11,10 @@
 </script>
 
 <style>
-  body {
+  html,body {
     margin: 0;
+    height: 100%;
+    background-color: aliceblue;
   }
 
   #app {
@@ -21,6 +23,5 @@
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
     padding: 15px;
-    background-color: aliceblue;
   }
 </style>
