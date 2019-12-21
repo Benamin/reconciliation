@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <el-button @click="login">登录</el-button>
     <div class="handle">
       <el-row :gutter="20">
         <el-col :span="12" class="search-left">
@@ -402,26 +403,6 @@
       }
     },
     created () {
-      const d = Date.now()
-      const timeStamp = Math.round(d / 1000) + ''
-      const nonce = this.uuidNum()
-      const content = {
-        'stationNo': '6000000',
-        'stationBranch': '',
-        'userName': '吴超',
-        'password': '88888',
-      }
-      const sign = `appId=52492bf5765840b192fac6c7ca3d10c8&secretKey=48c85555fbf14d489536070b32c6998f&timeStamp=${timeStamp}&nonce=${nonce}&content=${JSON.stringify(content)}`
-      console.log(sign)
-      const header = {
-        appId: '52492bf5765840b192fac6c7ca3d10c8',
-        nonce: nonce,
-        timeStamp: timeStamp,
-        sign: md5(sign)
-      }
-      this.$api.userlogin(content, header, res => {
-        console.log(res)
-      })
       const y = new Date().getFullYear()
       for (let i = y; i > 2000; i--) {
         this.yearMap.push(i)
@@ -434,6 +415,28 @@
       }
     },
     methods: {
+      login(){
+        const d = Date.now()
+        const timeStamp = Math.round(d / 1000) + ''
+        const nonce = this.uuidNum()
+        const content = {
+          'stationNo': '6000000',
+          'stationBranch': '',
+          'userName': '吴超',
+          'password': '88888',
+        }
+        const sign = `appId=52492bf5765840b192fac6c7ca3d10c8&secretKey=48c85555fbf14d489536070b32c6998f&timeStamp=${timeStamp}&nonce=${nonce}&content=${JSON.stringify(content)}`
+        console.log(sign)
+        const header = {
+          timeStamp: timeStamp,
+          nonce: nonce,
+          appId: '52492bf5765840b192fac6c7ca3d10c8',
+          sign: md5(sign)
+        }
+        this.$api.userlogin(content, header, res => {
+          console.log(res)
+        })
+      },
       /** 产生一个随机的15位长度整数 */
       uuidNum () {
         let text = ''
